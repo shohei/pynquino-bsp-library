@@ -87,7 +87,7 @@ libarduino.a: obj_dir print_msg_arduino_base $(ARDUINO_OBJS)
 	
 
 obj_dir:
-	mkdir obj
+	mkdir -p obj
 
 print_msg_arduino_base:
 	@echo "Compiling Arduino Library"
