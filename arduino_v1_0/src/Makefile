@@ -26,7 +26,8 @@ COMPILER_FLAGS=
 ifeq ($(COMPILER) , arm-xilinx-eabi-gcc)
 	EXTRA_ARCHIVE_FLAGS=rc
 else
-	EXTRA_ARCHIVE_FLAGS=--create
+	#EXTRA_ARCHIVE_FLAGS=--create
+	EXTRA_ARCHIVE_FLAGS=rc
 endif
 
 ifeq ($(COMPILER) , mb-gcc)
