@@ -29,10 +29,11 @@
 
 #include "xgpiops.h"
 #include "xscugic.h"
+#include "xtime_l.h"
 
 XScuGic IntcInstance;
 XGpioPs Gpio;
-
+XTime tCurrent;
 
 #endif
 
@@ -78,13 +79,18 @@ void init()
 uint32_t millis(void)
 {
 //	unsigned int millis = ~TMR_MILLIS;
-
+  XTime_GetTime(&tCurrent);
+  u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
+  u32 millis = micros/1000;
+  //printf("Output took %d ms.\n",millis);
 	return millis;
 }
 
 uint32_t micros(void)
 {
 //	unsigned int micros = ~TMR_MICROS;
+  XTime_GetTime(&tCurrent);
+  u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
 
 	return micros;
 }
@@ -124,5 +130,3 @@ void delayMicroseconds(uint32_t value)
 
 }
 
-
-  
