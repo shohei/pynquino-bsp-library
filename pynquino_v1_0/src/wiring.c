@@ -28,12 +28,12 @@
 #ifdef XPAR_XGPIOPS_NUM_INSTANCES
 
 #include "xgpiops.h"
-#include "xscugic.h"
-#include "xtime_l.h"
+//#include "xscugic.h"
+//#include "xtime_l.h"
 
-XScuGic IntcInstance;
+//XScuGic IntcInstance;
 XGpioPs Gpio;
-XTime tCurrent;
+//XTime tCurrent;
 
 #endif
 
@@ -48,7 +48,7 @@ void init()
 //	xil_printf("wiring.c init() - enter\n\r");
 
 #ifdef XPAR_XGPIOPS_NUM_INSTANCES
-	XScuGic_Config *IntcConfig;
+	//XScuGic_Config *IntcConfig;
 	XGpioPs_Config *GPIOConfigPtr;
 
 
@@ -78,20 +78,22 @@ void init()
 
 uint32_t millis(void)
 {
-//	unsigned int millis = ~TMR_MILLIS;
-  XTime_GetTime(&tCurrent);
-  u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
-  u32 millis = micros/1000;
+	//unsigned int millis = ~TMR_MILLIS;
+  //XTime_GetTime(&tCurrent);
+  //u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
+  //u32 millis = micros/1000;
   //printf("Output took %d ms.\n",millis);
+  uint32_t millis = 0;
 	return millis;
 }
 
 uint32_t micros(void)
 {
-//	unsigned int micros = ~TMR_MICROS;
-  XTime_GetTime(&tCurrent);
-  u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
+	//unsigned int micros = ~TMR_MICROS;
+  //XTime_GetTime(&tCurrent);
+  //u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
 
+  uint32_t micros = 0;
 	return micros;
 }
 

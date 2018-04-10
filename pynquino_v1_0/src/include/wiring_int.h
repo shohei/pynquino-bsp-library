@@ -27,10 +27,10 @@ extern "C" {
 
 #ifdef XPAR_XGPIOPS_NUM_INSTANCES
 
-#include "xscugic.h"
+//#include "xscugic.h"
 #include "xgpiops.h"
 
-extern XScuGic IntcInstance;
+//extern XScuGic IntcInstance;
 extern XGpioPs Gpio;
 
 #endif

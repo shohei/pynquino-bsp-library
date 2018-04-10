@@ -18,15 +18,14 @@
 # 
 ######################################################
 
-COMPILER=
-ARCHIVER=
+COMPILER=mb-gcc
+ARCHIVER=mb-ar
 CP=cp
 COMPILER_FLAGS=
 
 ifeq ($(COMPILER) , arm-xilinx-eabi-gcc)
 	EXTRA_ARCHIVE_FLAGS=rc
 else
-	#EXTRA_ARCHIVE_FLAGS=--create
 	EXTRA_ARCHIVE_FLAGS=rc
 endif
 
@@ -91,7 +90,7 @@ obj_dir:
 	mkdir -p obj
 
 print_msg_arduino_base:
-	@echo "Compiling Arduino Library"
+	@echo "Compiling Pynquino Library"
 
 .c.o:
 	$(COMPILER) $(COMPILER_FLAGS) $(EXTRA_COMPILER_FLAGS) $(INCLUDES) -c $< -o obj/$(@F)
