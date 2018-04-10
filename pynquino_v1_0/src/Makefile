@@ -57,8 +57,8 @@ EXPORT_INCLUDE_FILES = $(ARDUINO_DIR)/include/Arduino.h
 
 
 			
-libs: libarduino.a
-	cp libarduino.a $(RELEASEDIR)
+libs: libpynquino.a
+	cp libpynquino.a $(RELEASEDIR)
 	make clean
 
 include:
@@ -69,10 +69,10 @@ include:
 clean:
 	rm -rf obj/itoa.o obj/wiring.o obj/wiring_digital.o obj/wmain.o	
 	rmdir obj
-	rm libarduino.a
+	rm libpynquino.a
 
 
-libarduino.a: obj_dir print_msg_arduino_base $(ARDUINO_OBJS)
+libpynquino.a: obj_dir print_msg_arduino_base $(ARDUINO_OBJS)
 	@echo "Creating archive $@"
 	$(ARCHIVER) $(EXTRA_ARCHIVE_FLAGS) $@ obj/itoa.o obj/wiring.o obj/wiring_digital.o obj/wmain.o
 	@echo "Copy include files..."
