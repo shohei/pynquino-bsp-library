@@ -4,7 +4,7 @@
 #*****************************************************************************
 
 proc generate {lib_handle} {
-    puts "Run Arduino Library generate"
+    puts "Run Pynquino Library generate"
 
 }
 
@@ -15,7 +15,7 @@ proc xgen_opts_file {libhandle} {
 
 	close $file_handle
 
-	puts "Copy Arduino header files"
+	puts "Copy Pynquino header files"
 	
 	# Copy the include files to the include directory
 	set srcdir [file join src include]

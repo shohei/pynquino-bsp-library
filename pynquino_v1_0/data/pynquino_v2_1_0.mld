@@ -7,14 +7,14 @@
 
 OPTION psf_version = 2.1.0 ;
 
-BEGIN LIBRARY arduino
+BEGIN LIBRARY pynquino
 
- OPTION DESC = "Arduino System Library";
+ OPTION DESC = "Pynquino System Library";
  OPTION copyfiles = all;
 
  OPTION VERSION = 1.0;
 
- OPTION APP_LINKER_FLAGS = "-Wl,--start-group,-larduino,-lxil,-lgcc,-lc,--end-group";
+ OPTION APP_LINKER_FLAGS = "-Wl,--start-group,-lpynquino,-lxil,-lgcc,-lc,--end-group";
 
  PARAM NAME = _USE_MCSIO   ,DESC = "0:Disabled, 1:Enabled. Using of MCS I/O Module"                   , TYPE = int , DEFAULT = 0;
 
