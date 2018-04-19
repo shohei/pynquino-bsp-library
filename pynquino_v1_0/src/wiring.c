@@ -5,6 +5,9 @@
 
 #include "xparameters.h"
 
+#include "xtmrctr.h"
+XTmrCtr TimerCounterInst;
+
 //#include "xiomodule_l.h"
 
 // PIT1 uses FIT1 prescaler
@@ -73,7 +76,14 @@ void init()
 #endif
 
 //	xil_printf("wiring.c init() - exit\n\r");
-
+  Status;
+  Status = XTmrCtr_Initialize(&TimerCounterInst, XPAR_TMRCTR_5_DEVICE_ID);
+  if (Status != XST_SUCCESS) {
+    printf("Timer Initialize Error\n\r");
+        return XST_FAILURE;
+  }
+  XTmrCtr_SetOptions(&TimerCounterInst, 0, XTC_AUTO_RELOAD_OPTION);
+  XTmrCtr_Start(&TimerCounterInst, 0);
 }
 
 uint32_t millis(void)
@@ -83,7 +93,7 @@ uint32_t millis(void)
   //u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
   //u32 millis = micros/1000;
   //printf("Output took %d ms.\n",millis);
-  uint32_t millis = 0;
+  uint32_t millis = (uint32_t) micros() / 1000.0;
 	return millis;
 }
 
@@ -93,7 +103,8 @@ uint32_t micros(void)
   //XTime_GetTime(&tCurrent);
   //u32 micros =  1.0 * (tCurrent) / (COUNTS_PER_SECOND/1000000L);
 
-  uint32_t micros = 0;
+  uint32_t micros = (uint32_t) XTmrCtr_GetValue(&TimerCounterInst, 0) / 100.0;
+  //uint32_t micros = 0;
 	return micros;
 }
 
