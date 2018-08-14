@@ -18,79 +18,48 @@
 # 
 ######################################################
 
-COMPILER=mb-gcc
-ARCHIVER=mb-ar
+COMPILER:=mb-gcc
+ARCHIVER:=mb-ar
 CP=cp
 COMPILER_FLAGS=
-
-ifeq ($(COMPILER) , arm-xilinx-eabi-gcc)
-	EXTRA_ARCHIVE_FLAGS=rc
-else
-	EXTRA_ARCHIVE_FLAGS=rc
-endif
-
-ifeq ($(COMPILER) , mb-gcc)
-	EXTRA_ARCHIVE_FLAGS=rc
-endif
-
+LIB=libxil.a
+EXTRA_ARCHIVE_FLAGS=rc
 
 RELEASEDIR=../../../lib
 INCLUDEDIR=../../../include
-INCLUDES=-I./include/ -I${INCLUDEDIR} 
-ARDUINO_DIR = .
+INCLUDES=-I./include -I${INCLUDEDIR} 
+PYNQUINO_DIR = .
 
-LIB_SRCS = $(ARDUINO_DIR)/itoa.c \
-           $(ARDUINO_DIR)/wiring_digital.c \
-           $(ARDUINO_DIR)/wiring.c \
-           $(ARDUINO_DIR)/wmain.c
-
+LIB_SRCS = $(PYNQUINO_DIR)/itoa.c \
+           $(PYNQUINO_DIR)/wiring_digital.c \
+           $(PYNQUINO_DIR)/wiring.c \
+           $(PYNQUINO_DIR)/wmain.c
           
-# create ARDUINO_SRCS based on configured options
+# create PYNQUINO_SRCS based on configured options
 
-ARDUINO_SRCS = $(LIB_SRCS)
+PYNQUINO_SRCS = $(LIB_SRCS)
+PYNQUINO_OBJS = $(PYNQUINO_SRCS:%.c=%.o)
 
-ARDUINO_OBJS = $(ARDUINO_SRCS:%.c=%.o)
-          
+EXPORT_INCLUDE_FILES = $(PYNQUINO_DIR)/include/Arduino.h 
+INCLUDEFILES=$(PYNQUINO_DIR)/include/*.h 
 
-EXPORT_INCLUDE_FILES = $(ARDUINO_DIR)/include/Arduino.h 
-
-
-			
 libs: libpynquino.a
-	cp libpynquino.a $(RELEASEDIR)
-	make clean
 
-include:
-	@for i in $(EXPORT_INCLUDE_FILES); do \
-	${CP} -r $$i ${INCLUDEDIR}; \
-	done
+libpynquino.a: print_msg_pynquino $(PYNQUINO_OBJS)
+	$(ARCHIVER) $(EXTRA_ARCHIVE_FLAGS) ${RELEASEDIR}/${LIB} ${PYNQUINO_OBJS}
+
+print_msg_pynquino:
+	@echo "Compiling Pynquino library"
+
+.PHONY: include
+include: libpynquino_includes
+
+libpynquino_includes:
+	${CP} ${INCLUDEFILES} ${INCLUDEDIR}
 
 clean:
-	rm -rf obj/itoa.o obj/wiring.o obj/wiring_digital.o obj/wmain.o	
-	rmdir obj
-	rm libpynquino.a
+	rm -rf $(PYNQUINO_DIR)/${OUTS}
 
+$(PYNQUINO_DIR)/%.o: $(PYNQUINO_DIR)/%.c $(INCLUDEFILES)
+	$(COMPILER) $(COMPILER_FLAGS) $(EXTRA_COMPILER_FLAGS) $(INCLUDES) -c $< -o $@
 
-libpynquino.a: obj_dir print_msg_arduino_base $(ARDUINO_OBJS)
-	@echo "Creating archive $@"
-	$(ARCHIVER) $(EXTRA_ARCHIVE_FLAGS) $@ obj/itoa.o obj/wiring.o obj/wiring_digital.o obj/wmain.o
-	@echo "Copy include files..."
-	${CP} -r $(ARDUINO_DIR)/include/Arduino.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/binary.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/registers.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/wiring.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/wiring_constants.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/wiring_analog.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/wiring_digital.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/wiring_shift.h ${INCLUDEDIR} 
-	${CP} -r $(ARDUINO_DIR)/include/pins_arduino.h ${INCLUDEDIR} 
-	
-
-obj_dir:
-	mkdir -p obj
-
-print_msg_arduino_base:
-	@echo "Compiling Pynquino Library"
-
-.c.o:
-	$(COMPILER) $(COMPILER_FLAGS) $(EXTRA_COMPILER_FLAGS) $(INCLUDES) -c $< -o obj/$(@F)
