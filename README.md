@@ -1,4 +1,4 @@
-# pynquino bsp library
+# pynquino bsp library (work in progress)
 ## What is this
 This is an Arduino API porting to PYNQ by Xilinx. You'll be able to compile Arduino sketch on the PYNQ.
 
