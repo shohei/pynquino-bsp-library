@@ -3,7 +3,7 @@
 This is an Arduino API porting to PYNQ by Xilinx. You'll be able to compile Arduino sketches on the PYNQ.
 
 ## Install 
-Here is how to build PYNQ BSP with pynquino-bsp-library. All the Arduino functions will be merged into libxil.a.
+Here is how to build PYNQ-MicroBlaze BSP with pynquino-bsp-library. All the Arduino functions will be merged into libxil.a.
 ```sh
 git clone https://github.com/xilinx/pynq
 cd pynq/boards/sw_repo
