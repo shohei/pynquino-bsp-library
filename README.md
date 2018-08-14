@@ -13,8 +13,10 @@ That is,
 git clone https://github.com/xilinx/pynq
 cd pynq/boards/sw_repo
 cd pynqmb/src
-wget https://raw.githubusercontent.com/shohei/PYNQ/b8928631b1b8b118b046d204b2c2dbeeeb063648/boards/sw_repo/pynqmb/src/uart.c uart.c
-wget https://raw.githubusercontent.com/shohei/PYNQ/b8928631b1b8b118b046d204b2c2dbeeeb063648/boards/sw_repo/pynqmb/src/uart.h uart.h
+wget https://raw.githubusercontent.com/shohei/PYNQ/b8928631b1b8b118b046d204b2c2dbeeeb063648/boards/sw_repo/pynqmb/src/uart.c 
+mv uart.c.1 uart.c
+wget https://raw.githubusercontent.com/shohei/PYNQ/b8928631b1b8b118b046d204b2c2dbeeeb063648/boards/sw_repo/pynqmb/src/uart.h 
+mv uart.h.1 uart.h
 ```
 
 ### Prerequisites2. Fix mailbox_bram library
@@ -22,7 +24,8 @@ I extended a BRAM size of the Arduino IOP from the default 64K to 256K. You must
 ```sh
 cd pynq/boards/sw_repo
 cd mailbox_bram/src
-wget https://raw.githubusercontent.com/shohei/PYNQ/ef48cbed829094b6bce712e859e3d857db5741fc/boards/sw_repo/mailbox_bram/src/mailbox_io.c mailbox_io.c
+wget https://raw.githubusercontent.com/shohei/PYNQ/ef48cbed829094b6bce712e859e3d857db5741fc/boards/sw_repo/mailbox_bram/src/mailbox_io.c 
+mv mailbox_io.c.1 mailbox_io.c
 ```
 ### Prerequisites2. Fix linker script
 You also have to update the linker script.
