@@ -24,10 +24,14 @@ vim lscript.ld
 ```diff
 MEMORY
 {
--   microblaze_bram : ORIGIN = 0x50, LENGTH = 0xEFB0
-+  microblaze_bram : ORIGIN = 0x50, LENGTH = 0xEFB0
+-  microblaze_bram : ORIGIN = 0x50, LENGTH = 0xEFB0
++  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
 }
 ```
+and make
+>||
+make
+||<
 
 ## Reference
 The original code was taken from the project folowing:
