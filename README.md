@@ -29,9 +29,9 @@ MEMORY
 }
 ```
 and make
->||
+```
 make
-||<
+```
 
 ## Reference
 The original code was taken from the project folowing:
