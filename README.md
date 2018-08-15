@@ -30,7 +30,7 @@ cd mailbox_bram/src
 wget https://raw.githubusercontent.com/shohei/PYNQ/ef48cbed829094b6bce712e859e3d857db5741fc/boards/sw_repo/mailbox_bram/src/mailbox_io.c 
 mv mailbox_io.c.1 mailbox_io.c
 ```
-### Prerequisites2. Fix linker script
+### Prerequisites3. Fix linker script
 You also have to update the linker script if you increase the BRAM size to 256K. 
 ```
 cd pynq/boards/sw_repo/bsp_iop_arduino_mb
