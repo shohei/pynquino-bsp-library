@@ -59,7 +59,7 @@ cd pynq/boards/sw_repo
 git clone https://github.com/shohei/pynquino-bsp-library
 make
 ```
-Now you've got a bsp_iop_arduino_mb. Copy this folder to pynq/pynq/lib/arduino.
+Now you've got a bsp_iop_arduino_mb. Copy this folder to pynq/pynq/lib/arduino and rename it as bsp_iop_arduino.
 
 
 
