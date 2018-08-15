@@ -45,6 +45,7 @@ MEMORY
 ```
 ### Prerequiresites4. Fix makefile
 Create BSP based on hardware definition file top.hdf, rather than default base.hdf.
+
 PYNQ/boards/sw_repo/makefile
 ```diff
 - HDF := ../Pynq-Z1/base/base/base.sdk/base.hdf
