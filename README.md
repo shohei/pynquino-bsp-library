@@ -43,10 +43,14 @@ MEMORY
 +  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
 }
 ```
-and make
+### Prerequiresites4. Fix makefile
+Create BSP based on hardware definition file top.hdf, rather than default base.hdf.
+PYNQ/boards/sw_repo/makefile
+```diff
+- HDF := ../Pynq-Z1/base/base/base.sdk/base.hdf
++ HDF := ../Pynq-Z1/base/base/base.sdk/top.hdf
 ```
-make
-```
+
 ### Finally 
 Here we build a PYNQ-MicroBlaze BSP with pynquino-bsp-library. All the Arduino functions will be merged into libxil.a.
 ```sh
