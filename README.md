@@ -25,19 +25,6 @@ cd pynq/boards/sw_repo/mailbox_bram/src
 + int last_available = 0x3FFFF;
 ```
 
-### Prerequisites2. Fix linker script
-You also have to update the linker script if you increase the BRAM size to 256K. 
-```
-cd pynq/boards/sw_repo/bsp_iop_arduino_mb
-vim lscript.ld
-```
-```diff
-MEMORY
-{
--  microblaze_bram : ORIGIN = 0x50, LENGTH = 0xEFB0
-+  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
-}
-```
 ### Prerequisites3. Fix makefile
 Create BSP based on hardware definition file top.hdf, rather than default base.hdf.
 
@@ -69,17 +56,34 @@ boards/sw_repo/pynqmb/src/uart.h
 void uart_readline(uart dev_id, char* read_data);
 ```
 
-### Finally 
+### Build 
 Here we build a PYNQ-MicroBlaze BSP with pynquino-bsp-library. All the Arduino functions will be merged into libxil.a.
 ```sh
 cd pynq/boards/sw_repo
 git clone https://github.com/shohei/pynquino-bsp-library
 make
 ```
-Now you've got a bsp_iop_arduino_mb. Copy this folder to pynq/pynq/lib/arduino and rename it as bsp_iop_arduino.
+Now you've got a bsp_iop_arduino_mb. 
 
+### Postprocess. Fix linker script
+You also have to update the linker script if you increase the BRAM size to 256K. 
+```
+cd pynq/boards/sw_repo/bsp_iop_arduino_mb
+vim lscript.ld
+```
+```diff
+MEMORY
+{
+-  microblaze_bram : ORIGIN = 0x50, LENGTH = 0xEFB0
++  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
+}
+```
 
-
+### Install
+Copy bsp_iop_arduino_mb folder to pynq/pynq/lib/arduino and rename it as bsp_iop_arduino.
+```sh
+cp -r bsp_iop_arduino_mb pynq/lib/arduino/bsp_iop_arduino
+```
 ## Reference
 The original code was taken from the project folowing:
 http://igg.me/at/zynq
