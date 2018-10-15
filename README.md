@@ -7,6 +7,7 @@ This is an Arduino API porting to PYNQ by Xilinx. You'll be able to compile Ardu
 ### Prerequisites 1. Fix mailbox_bram library
 You must update mailbox_bram library accordingly. This is caused by the BRAM size increase mentioned above.
 https://github.com/shohei/PYNQ/commit/ef48cbed829094b6bce712e859e3d857db5741fc
+#### mailbox_bram
 ```sh
 cd pynq/boards/sw_repo/mailbox_bram/src
 ```
@@ -24,6 +25,20 @@ cd pynq/boards/sw_repo/mailbox_bram/src
 - int last_available = 0xFFFF;
 + int last_available = 0x3FFFF;
 ```
+#### circular_buffer
+boards/sw_repo/pynqmb/src/circular_buffer.h
+```diff
+- #define MAILBOX_CMD_ADDR       (*(volatile u32 *)(0x0000FFFC))
+- #define MAILBOX_DATA(x)        (*(volatile u32 *)(0x0000F000 +((x)*4)))
+- #define MAILBOX_DATA_PTR(x)    ( (volatile u32 *)(0x0000F000 +((x)*4)))
+- #define MAILBOX_DATA_FLOAT(x)     (*(volatile float *)(0x0000F000 +((x)*4)))
+- #define MAILBOX_DATA_FLOAT_PTR(x) ( (volatile float *)(0x0000F000 +((x)*4)))
+
++ #define MAILBOX_CMD_ADDR       (*(volatile u32 *)(0x00003FFFC))
++ #define MAILBOX_DATA(x)        (*(volatile u32 *)(0x00003F000 +((x)*4)))
++ #define MAILBOX_DATA_PTR(x)    ( (volatile u32 *)(0x00003F000 +((x)*4)))
++ #define MAILBOX_DATA_FLOAT(x)     (*(volatile float *)(0x00003F000 +((x)*4)))
++ #define MAILBOX_DATA_FLOAT_PTR(x) ( (volatile float *)(0x00003F000 +((x)*4)))```
 
 ### Prerequisites 2. Fix makefile
 Create BSP based on hardware definition file top.hdf, rather than default base.hdf.
