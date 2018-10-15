@@ -21,8 +21,8 @@ cd pynq/boards/sw_repo/mailbox_bram/src
 + #define RPCOUT_OFFSET 0x3FC00
 ```
 ```diff
-int last_available = 0xFFFF;
-int last_available = 0x3FFFF;
+- int last_available = 0xFFFF;
++ int last_available = 0x3FFFF;
 ```
 
 ### Prerequisites2. Fix linker script
