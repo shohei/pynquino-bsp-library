@@ -117,7 +117,7 @@ cp -r bsp_iop_arduino_mb pynq/lib/arduino/bsp_iop_arduino
 
 ### Post install
 pynq/lib/arduino/bsp_iop_arduino/.sdkproject
-```
+```diff
 THIRPARTY=false
 - HW_PROJECT_REFERENCE=hw_base
 + HW_PROJECT_REFERENCE=base_wrapper_hw_platform_0 # or suitable name
