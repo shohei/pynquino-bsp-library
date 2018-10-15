@@ -4,7 +4,7 @@ This is an Arduino API porting to PYNQ by Xilinx. You'll be able to compile Ardu
 
 ## Install 
 
-### Prerequisites1. Fix mailbox_bram library
+### Prerequisites 1. Fix mailbox_bram library
 You must update mailbox_bram library accordingly. This is caused by the BRAM size increase mentioned above.
 https://github.com/shohei/PYNQ/commit/ef48cbed829094b6bce712e859e3d857db5741fc
 ```sh
@@ -25,7 +25,7 @@ cd pynq/boards/sw_repo/mailbox_bram/src
 + int last_available = 0x3FFFF;
 ```
 
-### Prerequisites3. Fix makefile
+### Prerequisites 2. Fix makefile
 Create BSP based on hardware definition file top.hdf, rather than default base.hdf.
 
 PYNQ/boards/sw_repo/makefile
@@ -34,7 +34,7 @@ PYNQ/boards/sw_repo/makefile
 + HDF := ../Pynq-Z1/base/base/base.sdk/base_wrapper.hdf
 ```
 
-### Prerequisites4. Update Uartlite library
+### Prerequisites 3. Update Uartlite library
 Add readline() function to Uartlite library
 
 boards/sw_repo/pynqmb/src/uart.c
