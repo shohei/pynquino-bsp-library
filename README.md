@@ -55,6 +55,17 @@ boards/sw_repo/pynqmb/src/uart.h
 ```c
 void uart_readline(uart dev_id, char* read_data);
 ```
+### Prerequisites 4. Edit build .tcl script
+Add pynquino as a build dependency
+```diff
+foreach mb $processors {
+    set bsp "bsp_${mb}"
+    if {![file exists $bsp]} {
+        puts "Creating new BSP ${bsp} ..."
+        createbsp -name $bsp -proc $mb -hwproject $hw_def -os standalone
+        setlib -bsp $bsp -lib pynqmb
+      + setlib -bsp $bsp -lib pynquino
+```
 
 ### Build 
 Here we build a PYNQ-MicroBlaze BSP with pynquino-bsp-library. All the Arduino functions will be merged into libxil.a.
