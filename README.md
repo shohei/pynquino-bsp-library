@@ -114,6 +114,21 @@ Copy bsp_iop_arduino_mb folder to pynq/pynq/lib/arduino and rename it as bsp_iop
 ```sh
 cp -r bsp_iop_arduino_mb pynq/lib/arduino/bsp_iop_arduino
 ```
+
+### Post install
+pynq/lib/arduino/bsp_iop_arduino/.sdkproject
+```
+THIRPARTY=false
+- HW_PROJECT_REFERENCE=hw_base
++ HW_PROJECT_REFERENCE=base_wrapper_hw_platform_0 # or suitable name
+PROCESSOR=iop_arduino_mb
+MSS_FILE=system.mss
+```
+pynq/lib/arduino/bsp_iop_arduino/.project
+```diff
+-        <name>bsp_iop_arduino_mb</name>
++       <name>bsp_iop_arduino</name>
+```
 ## Reference
 The original code was taken from the project folowing:
 http://igg.me/at/zynq
