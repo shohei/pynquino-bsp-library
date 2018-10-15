@@ -56,7 +56,7 @@ PYNQ/boards/sw_repo/makefile
 Add readline() function to Uartlite library
 
 boards/sw_repo/pynqmb/src/uart.c
-```diff
+```c
 void uart_readline(uart dev_id, char* read_data){
     unsigned int ReceivedCount = 0;
     while (1) {
@@ -70,7 +70,7 @@ void uart_readline(uart dev_id, char* read_data){
 }
 ```
 boards/sw_repo/pynqmb/src/uart.h
-```diff
+```c
 void uart_readline(uart dev_id, char* read_data);
 ```
 
