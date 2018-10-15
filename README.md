@@ -43,13 +43,35 @@ MEMORY
 +  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
 }
 ```
-### Prerequiresites4. Fix makefile
+### Prerequisites4. Fix makefile
 Create BSP based on hardware definition file top.hdf, rather than default base.hdf.
 
 PYNQ/boards/sw_repo/makefile
 ```diff
 - HDF := ../Pynq-Z1/base/base/base.sdk/base.hdf
 + HDF := ../Pynq-Z1/base/base/base.sdk/top.hdf
+```
+
+### Prerequisites5. Update Uartlite library
+Add readline() function to Uartlite library
+
+boards/sw_repo/pynqmb/src/uart.c
+```diff
+void uart_readline(uart dev_id, char* read_data){
+    unsigned int ReceivedCount = 0;
+    while (1) {
+            ReceivedCount += XUartLite_Recv(&xuart[dev_id],
+                           read_data + ReceivedCount,
+                           1);
+            if (read_data[ReceivedCount - 1] == '\n') {
+                break;
+            }
+        }
+}
+```
+boards/sw_repo/pynqmb/src/uart.h
+```diff
+void uart_readline(uart dev_id, char* read_data);
 ```
 
 ### Finally 
