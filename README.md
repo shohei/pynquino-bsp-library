@@ -77,18 +77,21 @@ make
 ```
 Now you've got a bsp_iop_arduino_mb. 
 
-### Postprocess. Fix linker script
+### Postprocess. Fix linker script and project name
 You also have to update the linker script if you increase the BRAM size to 256K. 
-```
-cd pynq/boards/sw_repo/bsp_iop_arduino_mb
-vim lscript.ld
-```
+
+pynq/boards/sw_repo/bsp_iop_arduino_mb/lscript.ld
 ```diff
 MEMORY
 {
 -  microblaze_bram : ORIGIN = 0x50, LENGTH = 0xEFB0
 +  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
 }
+```
+pynq/boards/sw_repo/bsp_iop_arduino_mb/.project
+```diff
+-  <name>bsp_iop_arduino_mb</name>
++  <name>bsp_iop_arduino</name>
 ```
 
 ### Install
