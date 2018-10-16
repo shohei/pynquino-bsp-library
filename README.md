@@ -93,8 +93,16 @@ make
 ```
 Now you've got a bsp_iop_arduino_mb. 
 
-### Postprocess. Fix linker script and project name
-You also have to update the linker script if you increase the BRAM size to 256K. 
+
+### Install
+Copy bsp_iop_arduino_mb folder to pynq/pynq/lib/arduino and rename it as bsp_iop_arduino.
+```sh
+cp -r bsp_iop_arduino_mb pynq/lib/arduino/bsp_iop_arduino
+```
+
+### Post-process. 
+#### Fix linker script
+You have to update the linker script if you increase the BRAM size to 256K. 
 
 pynq/boards/sw_repo/bsp_iop_arduino_mb/lscript.ld
 ```diff
@@ -104,19 +112,13 @@ MEMORY
 +  microblaze_bram : ORIGIN = 0x50, LENGTH = 0x3EFB0
 }
 ```
+### Fix bsp project name
 pynq/boards/sw_repo/bsp_iop_arduino_mb/.project
 ```diff
 -  <name>bsp_iop_arduino_mb</name>
 +  <name>bsp_iop_arduino</name>
 ```
-
-### Install
-Copy bsp_iop_arduino_mb folder to pynq/pynq/lib/arduino and rename it as bsp_iop_arduino.
-```sh
-cp -r bsp_iop_arduino_mb pynq/lib/arduino/bsp_iop_arduino
-```
-
-### Post install
+### Fix hardware project name
 pynq/lib/arduino/bsp_iop_arduino/.sdkproject
 ```diff
 THIRPARTY=false
@@ -125,11 +127,7 @@ THIRPARTY=false
 PROCESSOR=iop_arduino_mb
 MSS_FILE=system.mss
 ```
-pynq/lib/arduino/bsp_iop_arduino/.project
-```diff
--        <name>bsp_iop_arduino_mb</name>
-+       <name>bsp_iop_arduino</name>
-```
+
 ## Reference
 The original code was taken from the project folowing:
 http://igg.me/at/zynq
