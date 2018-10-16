@@ -2,7 +2,7 @@
 ## What is this
 This is an Arduino API porting to PYNQ by Xilinx. You'll be able to compile Arduino sketches on the PYNQ.
 
-## Install 
+## How to use 
 
 ### Prerequisites 1. Fix mailbox_bram library
 You must update mailbox_bram library accordingly. This is caused by the BRAM size increase mentioned above.
